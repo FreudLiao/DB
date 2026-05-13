@@ -7,25 +7,25 @@ int pathSteps(PathNode*path) {
     int len = 0;
     PathNode* cur = path;
 
-    while (cur != nullptr) {
+    while (cur != nullptr) { // 在還沒走到盡頭時
         len++;
         cur = cur ->next;
     }
     if( len == 0)
     return 0;
     
-    return len - 1;
+    return len - 1; // 步數=節點-1
 }
 
 void push(PathNode*& stack, int r, int c) {
     PathNode* newNode = new PathNode(r, c, stack);
-    stack = newNode;
+    stack = newNode; // 更新堆疊，永遠指向被PUSH的點
 }
 bool pop(PathNode*& stack, int& r, int& c) {
     if(stack == nullptr)
-    return false;
+    return false; //防呆
 
-    PathNode* temp = stack;
+    PathNode* temp = stack; // 移動頂端指標(保持後進先出)
     r = temp->r;
     c = temp->c;
     stack = stack-> next;
@@ -115,7 +115,7 @@ bool solveByDFS(const Maze& maze, PathNode*& path) {
 }
     
 void enqueue(PathNode*& head, PathNode*& tail, int r, int c) {
-    PathNode* node = new PathNode(r, c, nullptr);
+    PathNode* node = new PathNode(r, c, nullptr); // 新結點排在最後面(符合先進先出)
 
     if (tail == nullptr) {
         head = node;
@@ -131,7 +131,7 @@ bool dequeue(PathNode*& head, PathNode*& tail, int& r, int& c) {
         return false;
 
     PathNode* temp = head;
-
+// 暫存頭資料，取出座標
     r = temp->r;
     c = temp->c;
 
