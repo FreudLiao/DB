@@ -11,14 +11,14 @@ int pathSteps(PathNode*path) {
         len++;
         cur = cur ->next;
     }
-    if( len == 0)
+    if( len == 0) //處理邊界
     return 0;
     
     return len - 1; // 步數=節點-1
 }
 
 void push(PathNode*& stack, int r, int c) {
-    PathNode* newNode = new PathNode(r, c, stack);
+    PathNode* newNode = new PathNode(r, c, stack); // stack代表下一個節點
     stack = newNode; // 更新堆疊，永遠指向被PUSH的點
 }
 bool pop(PathNode*& stack, int& r, int& c) {
